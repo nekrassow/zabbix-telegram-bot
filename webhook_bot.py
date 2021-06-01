@@ -1,3 +1,4 @@
+#! /usr/bin/python3
 
 # -*- coding: utf-8 -*-
 
@@ -6,6 +7,7 @@ from telebot import types
 from pyzabbix import ZabbixAPI
 import cherrypy
 import time
+import config
 
 WEBHOOK_HOST = config.WEBHOOK_HOST
 WEBHOOK_PORT = config.WEBHOOK_PORT
@@ -35,7 +37,7 @@ class WebhookServer(object):
         else:
             raise cherrypy.HTTPError(403)
         
-bot = telebot.TeleBot(token)
+bot = telebot.TeleBot(config.token)
 
 def get_problem(zab_server,user,password):
     zapi = ZabbixAPI(zab_server)
