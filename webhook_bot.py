@@ -72,7 +72,7 @@ def get_problem(zab_server,user,password):
     res = ''
     for t in triggers:
         if int(t['value']) == 1:
-            res = res + '{0} - {1} {2}\n'.format(t['hosts'][0]['host'],t['description'],'(Unack)' if t['unacknowledged'] else '')
+            res = res + '*{0}* - _{1}_ {2}\n'.format(t['hosts'][0]['host'],t['description'],'(Unack)' if t['unacknowledged'] else '')
                   
     return res
 
@@ -88,7 +88,7 @@ def cmd_get_problem(message):
     keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
     button = types.KeyboardButton('Get current problem')
     keyboard.add(button)
-    bot.send_message(message.chat.id,get_problem(zab_server,user,password),reply_markup = keyboard)
+    bot.send_message(message.chat.id,get_problem(zab_server,user,password),parse_mode='Markdown',reply_markup = keyboard)
 
 bot.remove_webhook()
 time.sleep(5)
